@@ -7,13 +7,14 @@ let particles = [];
 let mouseX = 0;
 let mouseY = 0;
 
-// Configuración de partículas
+// Configuración de partículas (reducida en móviles)
+const isMobileDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 const particleConfig = {
-    count: 150,
-    speed: 0.5,
+    count: isMobileDevice ? 50 : 150, // Menos partículas en móviles
+    speed: isMobileDevice ? 0.3 : 0.5, // Más lento en móviles
     size: 2,
     colors: ['#667eea', '#764ba2', '#f093fb'],
-    maxDistance: 100
+    maxDistance: isMobileDevice ? 60 : 100 // Menos conexiones en móviles
 };
 
 // Inicialización cuando el DOM está listo
@@ -567,16 +568,21 @@ function animateHeroElements() {
 
 // Efectos adicionales de interacción
 document.addEventListener('DOMContentLoaded', function() {
-    // Efecto de parallax suave
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.hero');
-        
-        parallaxElements.forEach(element => {
-            const speed = 0.5;
-            element.style.transform = `translateY(${scrolled * speed}px)`;
+    // Detectar si es dispositivo táctil
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Efecto de parallax suave (solo en desktop)
+    if (!isTouchDevice) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
         });
-    });
+    }
     
     // Efecto de hover en las cards de proyecto
     const projectCards = document.querySelectorAll('.project-card');

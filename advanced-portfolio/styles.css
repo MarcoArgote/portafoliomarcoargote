@@ -28,11 +28,39 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     overflow-x: hidden;
-    cursor: none;
+    cursor: auto; /* Cursor por defecto en móviles */
+    /* Scroll suave en móviles */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Ocultar cursor nativo solo en desktop con cursor personalizado */
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
 }
 
 html {
     scroll-behavior: smooth;
+    /* Mejorar rendimiento de scroll en móviles */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimización de scroll para móviles */
+@media (hover: none) and (pointer: coarse) {
+    * {
+        /* Desactivar animaciones costosas en scroll para móviles */
+        scroll-behavior: smooth !important;
+    }
+    
+    /* Mejorar rendimiento de transformaciones */
+    .hero, .about, .projects, .contact {
+        will-change: auto;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
 }
 
 /* Custom Cursor */
@@ -48,6 +76,14 @@ html {
     z-index: 9999;
     transition: transform 0.1s ease;
     mix-blend-mode: difference;
+    display: none; /* Oculto por defecto en móviles */
+}
+
+/* Mostrar cursor personalizado solo en dispositivos no táctiles (desktop) */
+@media (hover: hover) and (pointer: fine) {
+    .custom-cursor {
+        display: block;
+    }
 }
 
 .cursor-inner {
