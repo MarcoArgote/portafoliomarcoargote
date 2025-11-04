@@ -1023,7 +1023,7 @@ function setupProjectsCarousel() {
         const offset = -(currentPage * cardsPerView * (cardWidth + gap));
         
         if (animate) {
-            track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         } else {
             track.style.transition = 'none';
         }

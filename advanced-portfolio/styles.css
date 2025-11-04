@@ -867,7 +867,7 @@ section {
 .projects-track {
     display: flex;
     gap: 40px;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
 }
 
@@ -1015,6 +1015,9 @@ section {
     transition: all 0.3s ease;
     position: relative;
     transform-style: preserve-3d;
+    aspect-ratio: 1 / 1.15; /* Hacer tarjetas más cuadradas */
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -1023,7 +1026,8 @@ section {
 }
 
 .project-image {
-    height: 200px;
+    height: 55%; /* 55% de la altura total de la tarjeta */
+    flex-shrink: 0;
     background: var(--gradient-primary);
     position: relative;
     overflow: hidden;
@@ -1085,19 +1089,28 @@ section {
 }
 
 .project-info {
-    padding: 30px;
+    padding: 20px 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
     color: var(--text-primary);
 }
 
 .project-description {
     color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 20px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .project-tech {
@@ -1439,6 +1452,7 @@ section {
         max-width: calc(100vw - 120px) !important;
         min-width: calc(100vw - 120px) !important;
         width: calc(100vw - 120px) !important;
+        aspect-ratio: 1 / 1.2 !important; /* Más cuadradas */
     }
 
     .project-card {
@@ -1447,6 +1461,24 @@ section {
 
     .project-card:hover {
         transform: translateY(-5px);
+    }
+
+    .project-image {
+        height: 50% !important;
+    }
+
+    .project-info {
+        padding: 18px 22px !important;
+    }
+
+    .project-title {
+        font-size: 1.2rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .project-description {
+        font-size: 0.88rem !important;
+        -webkit-line-clamp: 2 !important;
     }
 
     /* Prevenir desbordamiento horizontal */
@@ -1547,6 +1579,7 @@ section {
         max-width: calc(100vw - 100px) !important;
         min-width: calc(100vw - 100px) !important;
         width: calc(100vw - 100px) !important;
+        aspect-ratio: 1 / 1.2 !important; /* Más cuadradas en móvil */
     }
 
     .projects-carousel {
@@ -1561,7 +1594,22 @@ section {
     }
 
     .project-image {
-        height: 180px;
+        height: 50% !important;
+    }
+
+    .project-info {
+        padding: 15px 20px !important;
+    }
+
+    .project-title {
+        font-size: 1.1rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .project-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 12px !important;
+        -webkit-line-clamp: 2 !important;
     }
 
     .carousel-indicators {
