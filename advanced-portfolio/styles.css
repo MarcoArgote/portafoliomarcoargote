@@ -51,6 +51,8 @@ body {
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
     /* Mejorar rendimiento de scroll en móviles */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1390,11 +1392,23 @@ section {
         grid-template-columns: 1fr;
     }
 
+    /* Prevenir overflow horizontal en sección de proyectos */
+    .projects {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .projects .container {
+        overflow: hidden !important;
+        max-width: 100% !important;
+    }
+
     /* Carousel mobile adjustments */
     .projects-carousel-wrapper {
         gap: 8px;
         margin: 30px -20px;
         padding: 0 20px;
+        overflow: hidden !important;
     }
 
     .carousel-nav {
@@ -1409,11 +1423,14 @@ section {
     }
 
     .projects-carousel {
-        overflow: visible;
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: calc(100vw - 96px) !important;
     }
 
     .projects-track {
         gap: 15px;
+        display: flex !important;
     }
 
     /* 1 card on mobile - full width */
@@ -1432,9 +1449,14 @@ section {
         transform: translateY(-5px);
     }
 
-    /* Asegurar que el carrusel funcione en móvil */
-    .projects-carousel {
-        width: calc(100vw - 96px) !important;
+    /* Prevenir desbordamiento horizontal */
+    .projects-carousel-wrapper {
+        overflow: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .projects {
+        overflow-x: hidden !important;
     }
 
     .carousel-indicators {
@@ -1528,7 +1550,14 @@ section {
     }
 
     .projects-carousel {
-        width: calc(100vw - 80px) !important;
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: calc(100vw - 80px) !important;
+    }
+
+    .projects-carousel-wrapper {
+        max-width: 100vw !important;
+        overflow: hidden !important;
     }
 
     .project-image {
