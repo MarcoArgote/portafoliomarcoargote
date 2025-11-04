@@ -79,9 +79,9 @@
                         <span>Ver Mi Trabajo</span>
                         <div class="button-bg"></div>
                     </button>
-                    <button class="cta-secondary">
+                    <a href="downloads/Marco Arogote.pdf" download="CV_Marco_Argote.pdf" class="cta-secondary" style="text-decoration: none;">
                         <span>Descargar CV</span>
-                    </button>
+                    </a>
                 </div>
             </div>
             
@@ -169,13 +169,28 @@
                     <h2 class="section-title">Mis Proyectos</h2>
                     <div class="section-subtitle">Trabajo reciente</div>
                 </div>
-                <div class="projects-grid">
+                
+                <!-- Carousel Controls -->
+                <div class="projects-carousel-wrapper">
+                    <button class="carousel-nav carousel-prev" id="projectsPrev" aria-label="Proyecto anterior">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="projects-carousel">
+                        <div class="projects-track">
                     <article class="project-card">
                         <div class="project-image">
                             <img class="project-thumb" src="img/minipensala.jpg" alt="Pensala project" />
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="https://pensalaweb.netlify.app/" class="project-link">Ver Proyecto</a>
+                                    <a href="#" class="project-link open-gallery" 
+                                       data-project="pensala"
+                                       data-title="Pensala - Startup"
+                                       data-description="Fundador & Developer de Pensala (2025). Desarrollo de páginas web, aplicaciones web y móviles con enfoque en productividad empresarial."
+                                       data-tech="React,PHP,MySQL,Ionic"
+                                       data-images="img/minipensala.jpg,img/proyectos/pensala/screenshot-1.jpg,img/proyectos/pensala/screenshot-2.jpg,img/proyectos/pensala/screenshot-3.jpg">Ver Proyecto</a>
                                     <a href="#" class="project-link">GitHub</a>
                                 </div>
                             </div>
@@ -199,7 +214,12 @@
                             <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" class="project-link">Ver Demo</a>
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
                                     <a href="#" class="project-link">GitHub</a>
                                 </div>
                             </div>
@@ -223,7 +243,12 @@
                             <img class="project-thumb" src="img/yo.png" alt="Producción Musical" />
                             <div class="project-overlay">
                                 <div class="project-links">
-                                    <a href="#" class="project-link">Ver Portfolio</a>
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="produccion-musical"
+                                       data-title="Producción Musical"
+                                       data-description="15 años de experiencia en producción musical y beatmaking. Creación de contenido audiovisual con herramientas profesionales y IA."
+                                       data-tech="FL Studio,Adobe Premiere,Photoshop,AI Video"
+                                       data-images="img/yo.png,img/proyectos/produccion-musical/screenshot-1.jpg,img/proyectos/produccion-musical/screenshot-2.jpg,img/proyectos/produccion-musical/screenshot-3.jpg">Ver Portfolio</a>
                                     <a href="#" class="project-link">GitHub</a>
                                 </div>
                             </div>
@@ -241,8 +266,189 @@
                             </div>
                         </div>
                     </article>
+                     <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
+                     <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
+                     <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-thumb" src="img/login.png" alt="IA Productivity Tools" />
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link open-gallery"
+                                       data-project="ia-tools"
+                                       data-title="Login"
+                                       data-description="Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas."
+                                       data-tech="AI Tools,JavaScript,Node.js,Automation"
+                                       data-images="img/login.png,img/proyectos/ia-tools/screenshot-1.jpg,img/proyectos/ia-tools/screenshot-2.jpg,img/proyectos/ia-tools/screenshot-3.jpg">Ver Proyecto</a>
+                                    <a href="#" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Login</h3>
+                            <p class="project-description">
+                                Login gamer listo para implementar en tus proyectos. Diseño moderno y funcional con animaciones modernas.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AI Tools</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Automation</span>
+                            </div>
+                        </div>
+                    </article>
 
+                        </div>
                     </div>
+                    
+                    <button class="carousel-nav carousel-next" id="projectsNext" aria-label="Proyecto siguiente">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators" id="projectsIndicators">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
             </div>
         </section>
 
@@ -386,6 +592,53 @@
             </div>
         </div>
     </footer>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-backdrop"></div>
+        <div class="gallery-container">
+            <button class="gallery-close" id="galleryClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="gallery-header">
+                <h2 class="gallery-title" id="galleryTitle">Proyecto</h2>
+                <p class="gallery-description" id="galleryDescription"></p>
+            </div>
+
+            <div class="gallery-main">
+                <button class="gallery-nav gallery-prev" id="galleryPrev">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="gallery-image-container">
+                    <img class="gallery-image" id="galleryImage" src="" alt="">
+                    <div class="gallery-counter" id="galleryCounter">1 / 1</div>
+                </div>
+
+                <button class="gallery-nav gallery-next" id="galleryNext">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="gallery-thumbnails" id="galleryThumbnails">
+                <!-- Thumbnails will be added dynamically -->
+            </div>
+
+            <div class="gallery-info">
+                <div class="gallery-tech-tags" id="galleryTechTags">
+                    <!-- Tech tags will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

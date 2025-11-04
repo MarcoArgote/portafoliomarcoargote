@@ -725,3 +725,391 @@ function setupHeroParallax() {
     // This avoids the image moving with the cursor while enabling CSS-based glow.
     photo.classList.add('photo-aura-active');
 }
+
+// ========================================
+// GALLERY MODAL SYSTEM
+// ========================================
+
+function setupGalleryModal() {
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryClose = document.getElementById('galleryClose');
+    const galleryImage = document.getElementById('galleryImage');
+    const galleryTitle = document.getElementById('galleryTitle');
+    const galleryDescription = document.getElementById('galleryDescription');
+    const galleryCounter = document.getElementById('galleryCounter');
+    const galleryThumbnails = document.getElementById('galleryThumbnails');
+    const galleryTechTags = document.getElementById('galleryTechTags');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentProjectData = {};
+    
+    // Abrir galería
+    function openGallery(projectData) {
+        currentProjectData = projectData;
+        currentImages = projectData.images;
+        currentIndex = 0;
+        
+        galleryTitle.textContent = projectData.title;
+        galleryDescription.textContent = projectData.description;
+        
+        // Crear miniaturas
+        galleryThumbnails.innerHTML = '';
+        currentImages.forEach((img, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = img;
+            thumb.alt = `Imagen ${index + 1}`;
+            thumb.className = 'gallery-thumb';
+            if (index === 0) thumb.classList.add('active');
+            
+            thumb.addEventListener('click', () => {
+                currentIndex = index;
+                updateGallery();
+            });
+            
+            galleryThumbnails.appendChild(thumb);
+        });
+        
+        // Crear tech tags
+        galleryTechTags.innerHTML = '';
+        projectData.tech.forEach(tag => {
+            const techTag = document.createElement('span');
+            techTag.className = 'tech-tag';
+            techTag.textContent = tag;
+            galleryTechTags.appendChild(techTag);
+        });
+        
+        updateGallery();
+        galleryModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Cerrar galería
+    function closeGallery() {
+        galleryModal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset zoom si estaba activo
+        galleryImage.classList.remove('zoomed');
+    }
+    
+    // Actualizar galería
+    function updateGallery() {
+        galleryImage.src = currentImages[currentIndex];
+        galleryImage.classList.remove('zoomed');
+        galleryCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+        
+        // Actualizar miniaturas activas
+        const thumbs = galleryThumbnails.querySelectorAll('.gallery-thumb');
+        thumbs.forEach((thumb, index) => {
+            thumb.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Actualizar botones de navegación
+        galleryPrev.classList.toggle('disabled', currentIndex === 0);
+        galleryNext.classList.toggle('disabled', currentIndex === currentImages.length - 1);
+    }
+    
+    // Navegación
+    function nextImage() {
+        if (currentIndex < currentImages.length - 1) {
+            currentIndex++;
+            updateGallery();
+        }
+    }
+    
+    function prevImage() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateGallery();
+        }
+    }
+    
+    // Zoom en imagen
+    galleryImage.addEventListener('click', () => {
+        galleryImage.classList.toggle('zoomed');
+    });
+    
+    // Event listeners
+    galleryClose.addEventListener('click', closeGallery);
+    galleryPrev.addEventListener('click', prevImage);
+    galleryNext.addEventListener('click', nextImage);
+    
+    // Cerrar con click en backdrop
+    galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal || e.target.classList.contains('gallery-backdrop')) {
+            closeGallery();
+        }
+    });
+    
+    // Navegación con teclado
+    document.addEventListener('keydown', (e) => {
+        if (!galleryModal.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeGallery();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    });
+    
+    // Configurar todos los botones "Ver Proyecto"
+    const openGalleryButtons = document.querySelectorAll('.open-gallery');
+    openGalleryButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const projectData = {
+                title: button.dataset.title,
+                description: button.dataset.description,
+                images: button.dataset.images.split(','),
+                tech: button.dataset.tech.split(',')
+            };
+            
+            openGallery(projectData);
+        });
+    });
+    
+    console.log('Gallery Modal: Sistema de galería inicializado ✨');
+}
+
+// Inicializar galería cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupGalleryModal);
+} else {
+    setupGalleryModal();
+}
+
+// ============================================
+// PROJECTS CAROUSEL
+// ============================================
+function setupProjectsCarousel() {
+    const track = document.querySelector('.projects-track');
+    const prevBtn = document.getElementById('projectsPrev');
+    const nextBtn = document.getElementById('projectsNext');
+    const indicatorsContainer = document.getElementById('projectsIndicators');
+    
+    if (!track || !prevBtn || !nextBtn || !indicatorsContainer) {
+        console.log('Carousel: Elements not found');
+        return;
+    }
+    
+    const cards = Array.from(track.querySelectorAll('.project-card'));
+    const totalCards = cards.length;
+    
+    // Configuration
+    let cardsPerView = 3;
+    let currentIndex = 0;
+    
+    // Detect cards per view based on screen size
+    function updateCardsPerView() {
+        if (window.innerWidth <= 768) {
+            cardsPerView = 1;
+        } else if (window.innerWidth <= 1024) {
+            cardsPerView = 2;
+        } else {
+            cardsPerView = 3;
+        }
+        updateCarousel(false);
+    }
+    
+    // Calculate total pages
+    function getTotalPages() {
+        return Math.ceil(totalCards / cardsPerView);
+    }
+    
+    // Create indicators
+    function createIndicators() {
+        indicatorsContainer.innerHTML = '';
+        const totalPages = getTotalPages();
+        
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            dot.setAttribute('aria-label', `Ir a página ${i + 1}`);
+            
+            if (i === 0) {
+                dot.classList.add('active');
+            }
+            
+            dot.addEventListener('click', () => {
+                goToPage(i);
+            });
+            
+            indicatorsContainer.appendChild(dot);
+        }
+    }
+    
+    // Update carousel position
+    function updateCarousel(animate = true) {
+        const totalPages = getTotalPages();
+        const currentPage = Math.floor(currentIndex / cardsPerView);
+        
+        // Calculate card width with gap (adjust gap based on screen size)
+        const cardWidth = cards[0].offsetWidth;
+        const gap = window.innerWidth <= 768 ? 15 : 40; // Mobile: 15px, Desktop: 40px
+        const offset = -(currentPage * cardsPerView * (cardWidth + gap));
+        
+        if (animate) {
+            track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        } else {
+            track.style.transition = 'none';
+        }
+        
+        track.style.transform = `translateX(${offset}px)`;
+        
+        // Update navigation buttons
+        prevBtn.classList.toggle('disabled', currentPage === 0);
+        nextBtn.classList.toggle('disabled', currentPage >= totalPages - 1);
+        
+        // Update indicators
+        const dots = indicatorsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentPage);
+        });
+        
+        // Add animation classes to visible cards
+        const startIdx = currentPage * cardsPerView;
+        const endIdx = Math.min(startIdx + cardsPerView, totalCards);
+        
+        cards.forEach((card, idx) => {
+            card.classList.remove('slide-in-left', 'slide-in-right');
+            
+            if (idx >= startIdx && idx < endIdx) {
+                if (animate) {
+                    const animClass = currentPage > Math.floor(currentIndex / cardsPerView) 
+                        ? 'slide-in-right' 
+                        : 'slide-in-left';
+                    setTimeout(() => {
+                        card.classList.add(animClass);
+                    }, (idx - startIdx) * 100);
+                }
+            }
+        });
+    }
+    
+    // Navigation functions
+    function nextPage() {
+        const totalPages = getTotalPages();
+        const currentPage = Math.floor(currentIndex / cardsPerView);
+        
+        if (currentPage < totalPages - 1) {
+            currentIndex = (currentPage + 1) * cardsPerView;
+            updateCarousel(true);
+        }
+    }
+    
+    function prevPage() {
+        const currentPage = Math.floor(currentIndex / cardsPerView);
+        
+        if (currentPage > 0) {
+            currentIndex = (currentPage - 1) * cardsPerView;
+            updateCarousel(true);
+        }
+    }
+    
+    function goToPage(pageIndex) {
+        currentIndex = pageIndex * cardsPerView;
+        updateCarousel(true);
+    }
+    
+    // Event listeners
+    prevBtn.addEventListener('click', prevPage);
+    nextBtn.addEventListener('click', nextPage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevPage();
+        } else if (e.key === 'ArrowRight') {
+            nextPage();
+        }
+    });
+    
+    // Touch/Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextPage(); // Swipe left
+            } else {
+                prevPage(); // Swipe right
+            }
+        }
+    }
+    
+    // Resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateCardsPerView();
+            createIndicators();
+        }, 250);
+    });
+    
+    // Auto-play (optional)
+    let autoplayInterval;
+    const autoplayDelay = 5000; // 5 seconds
+    
+    function startAutoplay() {
+        autoplayInterval = setInterval(() => {
+            const totalPages = getTotalPages();
+            const currentPage = Math.floor(currentIndex / cardsPerView);
+            
+            if (currentPage < totalPages - 1) {
+                nextPage();
+            } else {
+                currentIndex = 0;
+                updateCarousel(true);
+            }
+        }, autoplayDelay);
+    }
+    
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+    
+    // Pause autoplay on hover/interaction
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', startAutoplay);
+    prevBtn.addEventListener('click', stopAutoplay);
+    nextBtn.addEventListener('click', stopAutoplay);
+    
+    // Initialize
+    updateCardsPerView();
+    createIndicators();
+    updateCarousel(false);
+    startAutoplay(); // Comment this line if you don't want autoplay
+    
+    console.log('Projects Carousel: Inicializado con', totalCards, 'proyectos ✨');
+}
+
+// Initialize carousel
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupProjectsCarousel);
+} else {
+    setupProjectsCarousel();
+}
