@@ -1,4 +1,5 @@
 // JavaScript para Portfolio Avanzado con Animaciones Únicas
+'use strict';
 
 // Variables globales
 let isLoaded = false;
@@ -17,24 +18,67 @@ const particleConfig = {
     maxDistance: isMobileDevice ? 60 : 100 // Menos conexiones en móviles
 };
 
+// Forzar inicialización en cualquier estado
+function ensureInit() {
+    if (!isLoaded) {
+        console.log('Portfolio: Inicializando...');
+        initializeApp();
+        isLoaded = true;
+    }
+}
+
 // Inicialización cuando el DOM está listo
-document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureInit);
+} else {
+    ensureInit();
+}
+
+// Fallback adicional
+window.addEventListener('load', ensureInit);
 
 function initializeApp() {
-    setupLoadingScreen();
-    setupCustomCursor();
-    setupNavigation();
-    setupScrollProgress();
-    setupParticleSystem();
-    setupTypingAnimation();
-    setupScrollAnimations();
-    setupFormHandling();
-    setupIntersectionObserver();
-    setupFloatingSocialPanel();
-    // Parallax effect for hero photo (mouse move)
-    setupHeroParallax();
+    console.log('Portfolio: Iniciando aplicación...');
+    console.log('Portfolio: Es dispositivo móvil?', isMobileDevice);
+    
+    try {
+        setupLoadingScreen();
+        console.log('Portfolio: ✓ Loading screen');
+        
+        setupCustomCursor();
+        console.log('Portfolio: ✓ Custom cursor');
+        
+        setupNavigation();
+        console.log('Portfolio: ✓ Navigation');
+        
+        setupScrollProgress();
+        console.log('Portfolio: ✓ Scroll progress');
+        
+        setupParticleSystem();
+        console.log('Portfolio: ✓ Particles');
+        
+        setupTypingAnimation();
+        console.log('Portfolio: ✓ Typing animation');
+        
+        setupScrollAnimations();
+        console.log('Portfolio: ✓ Scroll animations');
+        
+        setupFormHandling();
+        console.log('Portfolio: ✓ Form handling');
+        
+        setupIntersectionObserver();
+        console.log('Portfolio: ✓ Intersection observer');
+        
+        setupFloatingSocialPanel();
+        console.log('Portfolio: ✓ Social panel');
+        
+        setupHeroParallax();
+        console.log('Portfolio: ✓ Hero parallax');
+        
+        console.log('Portfolio: ✅ Inicialización completa!');
+    } catch (error) {
+        console.error('Portfolio Error:', error);
+    }
 }
 
 // Sistema de carga avanzado
