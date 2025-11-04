@@ -85,20 +85,40 @@ function initializeApp() {
 function setupLoadingScreen() {
     const loadingScreen = document.getElementById('loadingScreen');
     const loadingPercentage = document.getElementById('loadingPercentage');
+    
+    if (!loadingScreen) {
+        console.error('Loading screen not found!');
+        return;
+    }
+    
     let progress = 0;
+    
+    // Timeout de seguridad: forzar hide después de 3 segundos máximo
+    const safetyTimeout = setTimeout(() => {
+        console.warn('Portfolio: Loading screen timeout - forzando cierre');
+        loadingScreen.classList.add('hidden');
+        loadingScreen.style.display = 'none';
+        isLoaded = true;
+        startMainAnimations();
+    }, 3000);
     
     const loadingInterval = setInterval(() => {
         progress += Math.random() * 15;
         if (progress > 100) progress = 100;
         
-        loadingPercentage.textContent = Math.floor(progress) + '%';
+        if (loadingPercentage) {
+            loadingPercentage.textContent = Math.floor(progress) + '%';
+        }
         
         if (progress >= 100) {
             clearInterval(loadingInterval);
+            clearTimeout(safetyTimeout);
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
+                loadingScreen.style.display = 'none';
                 isLoaded = true;
                 startMainAnimations();
+                console.log('Portfolio: ✓ Loading complete');
             }, 500);
         }
     }, 100);

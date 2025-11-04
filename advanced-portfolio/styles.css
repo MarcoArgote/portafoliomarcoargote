@@ -1346,8 +1346,22 @@ section {
         transform: translateX(-50%) scale(0.98) !important;
     }
 
+    .hero {
+        min-height: 100vh !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .hero-content {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
     .hero-title {
         font-size: clamp(2rem, 8vw, 3.5rem);
+        display: block !important;
     }
 
     .hero-description {
@@ -1357,6 +1371,7 @@ section {
     .hero-cta {
         flex-direction: column;
         align-items: center;
+        display: flex !important;
     }
 
     .cta-primary,
@@ -1403,9 +1418,10 @@ section {
 
     /* 1 card on mobile - full width */
     .projects-track .project-card {
-        flex: 0 0 calc(100vw - 120px);
-        max-width: calc(100vw - 120px);
-        min-width: calc(100vw - 120px);
+        flex: 0 0 calc(100vw - 120px) !important;
+        max-width: calc(100vw - 120px) !important;
+        min-width: calc(100vw - 120px) !important;
+        width: calc(100vw - 120px) !important;
     }
 
     .project-card {
@@ -1414,6 +1430,11 @@ section {
 
     .project-card:hover {
         transform: translateY(-5px);
+    }
+
+    /* Asegurar que el carrusel funcione en móvil */
+    .projects-carousel {
+        width: calc(100vw - 96px) !important;
     }
 
     .carousel-indicators {
@@ -1455,8 +1476,21 @@ section {
     }
 
     .hero {
-        height: 100vh;
-        padding: 0 15px;
+        min-height: 100vh;
+        height: auto;
+        padding: 80px 15px 40px;
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .hero-content {
+        order: 2;
+        margin-top: 20px;
+    }
+
+    .hero-photo {
+        order: 1;
+        margin-top: 40px;
     }
 
     .about-card,
@@ -1487,9 +1521,14 @@ section {
     }
 
     .projects-track .project-card {
-        flex: 0 0 calc(100vw - 100px);
-        max-width: calc(100vw - 100px);
-        min-width: calc(100vw - 100px);
+        flex: 0 0 calc(100vw - 100px) !important;
+        max-width: calc(100vw - 100px) !important;
+        min-width: calc(100vw - 100px) !important;
+        width: calc(100vw - 100px) !important;
+    }
+
+    .projects-carousel {
+        width: calc(100vw - 80px) !important;
     }
 
     .project-image {
